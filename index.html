@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Food Supply Portal - Choose Role</title>
+        <link rel="stylesheet" href="assets/style.css" />
+        <link
+            rel="shortcut icon"
+            href="./assets/favicon.png"
+            type="image/x-icon"
+        />
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                background: #f0f2f5;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 100vh;
+            }
+
+            .container {
+                background: white;
+                padding: 50px;
+                border-radius: 12px;
+                box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+                text-align: center;
+            }
+
+            .container:hover {
+                box-shadow: 0 60px 150px rgba(188, 86, 86, 0.2);
+                transform: scale(1.02);
+            }
+
+            h2 {
+                margin-bottom: 30px;
+            }
+
+            .role-btn {
+                display: block;
+                width: 80%;
+                margin: 10px auto;
+                padding: 15px;
+                background-color: #007bff;
+                color: white;
+                font-size: 16px;
+                border: none;
+                border-radius: 8px;
+                cursor: pointer;
+                transition: background-color 0.3s ease;
+            }
+
+            .role-btn:hover {
+                background-color: #0056b3;
+            }
+
+            .footer {
+                margin-top: 30px;
+                font-size: 13px;
+                color: #555;
+                border-top: 1px solid #ddd;
+                padding-top: 10px;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <h2>Welcome to Two Tier Transportation Management System</h2>
+            <p>Select your role to continue:</p>
+
+            <form action="" method="GET">
+                <button class="role-btn" formaction="admin/index.php">
+                    Login as System Admin
+                </button>
+                <button class="role-btn" formaction="dist_admin/login.php">
+                    Login as District Admin
+                </button>
+                <button class="role-btn" formaction="dist_user/login.php">
+                    Login as District User
+                </button>
+            </form>
+
+            <div class="footer">
+                &copy;
+                <?php echo date('Y'); ?>
+                Food Supply Authority 2025<br />
+                Designed and developed by <strong>NIC Lakhimpur</strong>
+            </div>
+        </div>
+    </body>
+</html>

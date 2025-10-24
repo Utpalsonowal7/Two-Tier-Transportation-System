@@ -1,0 +1,161 @@
+* {
+     margin: 0;
+     padding: 0;
+     box-sizing: border-box;
+}
+
+.dashboard {
+     display: flex;
+     align-items: center;
+     gap: 5px;
+}
+
+.dashboard .icon {
+     font-size: 20px;
+     color: #333;
+}
+
+.dashboard .slash {
+     font-size: 25px;
+     padding: 5px;
+     color: #000000;
+}
+
+.dashboard a {
+     text-decoration: none;
+     color: #333;
+}
+
+.dashboard a:hover {
+     color: #7450d4;
+}
+
+.cards {
+     max-width: 1200px;
+     min-height: 500px;
+     background-color: #f2f2f2;
+     margin: 20px auto;
+     border: 1px solid rgb(255, 255, 255);
+     display: grid;
+     grid-template-columns: auto auto auto;
+     gap: 15px;
+     padding: 25px;
+     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+     border-radius: 5px;
+}
+
+
+.card {
+     width: 300px;
+     height: 150px;
+     margin: 25px;
+     background-color: #e9e9e9;
+     font-size: 20px;
+     text-align: center;
+     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+     border-radius: 5px;
+}
+
+/* .card:hover {
+     background-color: red;
+} */
+
+.card h3 {
+     margin-top: 5px;
+}
+
+.circle {
+     width: 80px;
+     height: 80px;
+     border-radius: 50%;
+     border: 2px solid;
+     display: flex;
+     align-items: center;
+     justify-content: center;
+     font-size: 40px;
+     margin: 8px auto;
+     overflow: hidden;
+     text-overflow: ellipsis;
+     white-space: nowrap;
+     transition: all 0.3s ease;
+}
+
+
+.blue {
+     border-color: blue;
+     color: blue;
+}
+
+.orange {
+     border-color: orange;
+     color: orange;
+}
+
+.teal {
+     border-color: teal;
+     color: teal;
+}
+
+.red {
+     border-color: red;
+     color: red;
+}
+
+@media (max-width: 1024px) {
+     .cards {
+          grid-template-columns: repeat(2, 1fr);
+     }
+
+     .card {
+          width: 100%;
+          margin: 10px auto;
+     }
+}
+
+@media (max-width: 600px) {
+     .cards {
+          grid-template-columns: 1fr;
+          padding: 15px;
+     }
+
+     .card {
+          height: auto;
+          margin: 10px auto;
+     }
+
+     .circle {
+          width: 50px;
+          height: 50px;
+          font-size: 24px;
+     }
+
+     .card h3 {
+          font-size: 14px;
+     }
+}
+
+@media (max-width: 400px) {
+     .cards {
+          grid-template-columns: 1fr;
+          padding: 15px;
+     }
+
+     .card {
+          height: auto;
+          margin: 10px auto;
+     }
+
+     .circle {
+          width: 50px;
+          height: 50px;
+          font-size: 24px;
+     }
+
+     .card h3 {
+          font-size: 14px;
+     }
+
+     .card h4 {
+          font-size: 14px;
+     }
+}

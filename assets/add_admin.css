@@ -1,0 +1,159 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
+
+* {
+     margin: 0;
+     padding: 0;
+     box-sizing: border-box;
+}
+
+.form {
+     max-width: 800px;
+     /* min-height: 500px; */
+     min-height: auto;
+     background-color: #ffffff;
+     border: 1px solid rgb(255, 255, 255);
+     align-items: center;
+     margin: 20px auto;
+     gap: 15px;
+     padding: 25px;
+     box-shadow: 0 4px 6px rgba(191, 121, 121, 0.1);
+     border-radius: 5px;
+}
+
+.form form {
+     font-family: "Open Sans", sans-serif;
+     font-size: 18px;
+     font-weight: 600;
+}
+
+.form form input {
+     width: 100%;
+     padding: 10px;
+     margin: 5px 0;
+     border-radius: 5px;
+     border: 2px solid #eeeff2;
+}
+
+.form form label {
+     font-size: 18px;
+     /* font-weight: 600; */
+}
+
+.form form input[type="text"],
+input[type="password"],
+input[type="tel"] {
+     font-size: 18px;
+     /*    
+     color: #2e2e30; */
+     cursor: pointer;
+}
+
+.form form ::placeholder {
+     /* color: #2e2e30; */
+     font-size: 13px;
+}
+
+textarea {
+     font-size: 18px;
+     padding: 2px;
+     margin: 5px 0;
+     border-radius: 5px;
+     border: 2px solid #eeeff2;
+     width: 100%;
+     cursor: pointer;
+}
+
+textarea:hover {
+     border: 2px solid #cbcbcb;
+}
+
+textarea:focus {
+     border-color: #20ba5b;
+}
+
+.form form input:hover {
+     border: 2px solid #eeeff2;
+}
+
+form input:focus {
+     border-color: #20ba5b;
+}
+
+.form form select {
+     width: 100%;
+     padding: 10px;
+     border: 2px solid #eeeff2;
+     border-radius: 5px;
+     margin: 5px 0;
+}
+
+/* #district {
+     width: 100%;
+     font-size: 18px;
+     padding: 10px;
+     border: 2px solid #eeeff2;
+     border-radius: 5px;
+     margin: 5px 0;
+} */
+
+#one {
+     width: 100%;
+     font-size: 18px;
+     padding: 10px;
+     border: 2px solid #eeeff2;
+     border-radius: 5px;
+     margin: 5px 0;
+}
+
+#passwordValidation {
+     color: #ff0000;
+     display: none;
+     font-size: 14px;
+     padding: 0;
+     margin: 0;
+}
+
+.form form select:hover {
+     border: 2px solid #cbcbcb;
+}
+
+.form-btn {
+     display: flex;
+     justify-content: center;
+}
+
+.form button {
+     width: 200px;
+     padding: 10px;
+     margin-top: 15px;
+     display: flex;
+     justify-content: center;
+     align-items: center;
+     background-color: #0175e4;
+     color: #ffffff;
+     font-size: 15px;
+     border: 1px solid #93a6ea;
+     border-radius: 5px;
+     cursor: pointer;
+}
+
+.form .rmv-btn {
+     background-color: #ff4d4d;
+     border: 1px solid #ff9999;
+     margin: 0 0 5px;
+     padding: 6px;
+     width: 80px;
+}
+
+.showPass {
+     position: relative;
+     display: flex;
+}
+
+.showPass span {
+     position: absolute;
+     top: 50%;
+     right: 10px;
+     transform: translateY(-50%);
+     cursor: pointer;
+}

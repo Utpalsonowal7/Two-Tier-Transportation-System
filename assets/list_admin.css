@@ -1,0 +1,200 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.table-container {
+    width: 100%;
+    max-width: 1100px;
+    height: 100%;
+    /* overflow-y: auto;
+    overflow-x: auto;  */
+    margin: 20px auto;
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    border-radius: 10px;
+    overflow: auto;
+}
+
+th,
+td {
+    padding: 10px;
+    text-align: left;
+    /* padding: 8px; */
+    border: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+}
+
+th {
+    background: #333;
+    color: white;
+}
+
+tr:nth-child(even) {
+    background: #f9f9f9;
+}
+
+tr:hover {
+    background: #ddd;
+}
+
+/* td button {
+     display: grid;
+     width: 60px;
+     grid-template-areas: "btn1 btn2"
+          "btn3 btn3";
+     gap: 5px;
+}
+
+button a {
+     text-decoration: none;
+     color: white;
+}
+
+button {
+     padding: 10px;
+     border: none;
+     background: #b3a4a4;
+     color: white;
+     border-radius: 5px;
+     cursor: pointer;
+}
+
+.update-btn {
+     grid-area: btn1;
+     background-color: #dda364;
+}
+
+.delete-btn {
+     grid-area: btn2;
+     
+     background-color: #d64b4b;
+}
+
+.view-btn {
+     grid-area: btn3;
+     background-color: #4b8dd6;
+}
+
+button:hover {
+     background: #ce9090;
+     color: black;
+} */
+
+.button-group {
+    display: grid;
+    grid-template-areas:
+        "btn1 btn2"
+        "btn3 btn3";
+    gap: 5px;
+    width: 100%;
+}
+
+.update-btn {
+    grid-area: btn1;
+    background-color: #dda364;
+}
+
+.delete-btn {
+    grid-area: btn2;
+    background-color: #d64b4b;
+}
+
+.view-btn {
+    grid-area: btn3;
+    background-color: #4b8dd6;
+}
+
+.button-group button {
+    padding: 10px;
+    border: none;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: 0.3s;
+    width: 100%;
+}
+
+.button-group button:hover {
+    opacity: 0.85;
+    color: black;
+}
+
+button a {
+    text-decoration: none;
+    color: white;
+}
+
+/* .pagination {
+    margin-top: 10px;
+    text-align: center;
+}
+
+.pagination a {
+    display: inline-block;
+    padding: 8px 12px;
+    margin: 0 5px;
+    text-decoration: none;
+    color: white;
+    background-color: #007bff;
+    border-radius: 5px;
+}
+
+.pagination a.active {
+    background-color: #0056b3;
+    font-weight: bold;
+}
+
+.pagination a:hover {
+    background-color: #0056b3;
+}
+
+.pagination a.prev,
+.pagination a.next {
+    font-weight: bold;
+} */
+
+.table-header {
+    width: 100%;
+    background: #fff;
+    border-top: 1px solid #ddd;
+    border-left: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 7px 7px 3px #c5bbbb;
+    padding: 8px;
+    margin-bottom: 15px;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.table-header ul {
+    display: flex;
+    flex-direction: row;
+    gap: 15px;
+    list-style: none;
+}
+
+.table-header ul li .dt-buttons button {
+    font-size: 10px;
+    margin: 1px;
+    border: 1px solid #ddd;
+    padding: 8px 15px;
+    border-radius: 8px;
+    box-shadow:  2px 2px 5px #ddd;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.table-header ul li .dt-buttons button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 20px rgba(0, 0, 0, 0.3);
+} 
+
