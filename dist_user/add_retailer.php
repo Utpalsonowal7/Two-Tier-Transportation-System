@@ -50,13 +50,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
           exit();
      }
 
-     $checkQuery = pg_query_params(
-          $master_conn,
-          "SELECT 1 FROM retailers WHERE latitude = $1 and longitude = $2",
-          array($latitude, $longitude)
-     );
+     // $checkQuery = pg_query_params(
+     //      $master_conn,
+     //      "SELECT 1 FROM retailers WHERE latitude = $1 and longitude = $2",
+     //      array($latitude, $longitude)
+     // );
 
-     if (pg_num_rows($checkQuery) == 0) {
+     // if (pg_num_rows($checkQuery) == 0) {
 
           $query = pg_query_params(
                $master_conn,
@@ -83,9 +83,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
           } else {
                echo "<p style='color: red;'>Error: " . pg_last_error($master_conn) . "</p>";
           }
-     } else {
-          echo "<script>alert('Retailer with the same latitude and longitude already exists.');</script>";
-     }
+     // } else {
+     //      echo "<script>alert('Retailer with the same latitude and longitude already exists.');</script>";
+     // }
 }
 
 $district_query = "SELECT * FROM district";
@@ -145,13 +145,11 @@ $wh_result = pg_query($master_conn, $wh_query);
                     <input type="text" name="name" required><br><br>
 
                     <label>Latitude</label><br>
-                    <input type="text" name="latitude" pattern="^\d{1,2}\.\d{6}$"
-                         placeholder="Use this format: 12.123456 → number with 6 digits after the decimal."
+                    <input type="text" name="latitude" 
                          required><br><br>
 
                     <label>Longitude</label><br>
-                    <input type="text" name="longitude" pattern="^\d{1,2}\.\d{6}$"
-                         placeholder="Use this format: 12.123456 → number with 6 digits after the decimal."
+                    <input type="text" name="longitude" 
                          required><br><br>
 
                     <label>Location</label><br>

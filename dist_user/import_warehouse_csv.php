@@ -58,7 +58,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_FILES['excel_file'])) {
                $district_name = pg_fetch_result($district_result, 0, 'name');
 
 
-               $exists = pg_query_params($master_conn, "SELECT 1 FROM warehouse WHERE latitude = $1 AND longitude = $2", [$latitude, $longitude]);
+               $exists = pg_query_params($master_conn, "SELECT 1 FROM warehouse WHERE name = $1", [ $name]);
                if (pg_num_rows($exists) > 0) {
                     $errors[] = "Row $rowNumber: Duplicate coordinates (already exists).";
                     $skipped++;

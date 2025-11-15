@@ -8,13 +8,26 @@ if (!isset($_SESSION['login'])) {
      exit();
 }
 
+$get_id = $_SESSION['adminid'];
+// echo var_dump($get_id);
+
+$sql = pg_query_params($fsms_conn, "SELECT district_id from district_users where id= $1", [$get_id]);
+
+if($sql && pg_num_rows($sql) > 0) {
+     $row = pg_fetch_assoc($sql);
+     $district_id = $row['district_id'];
+} else{
+     die("User has no District Assigned");
+}
+
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
      $name = $_POST['name'];
      $latitude = $_POST['latitude'];
      $longitude = $_POST['longitude'];
      $location = $_POST['location'];
      $address = $_POST['address'];
-     $district_id = (int) $_POST['district_id'];
+     // $district_id = (int) $_POST['district_id'];
 
 
 
@@ -37,13 +50,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
           exit();
      }
 
-     $checkQuery = pg_query_params(
-          $master_conn,
-          "SELECT 1 FROM warehouse WHERE latitude = $1 and longitude = $2",
-          array($latitude, $longitude)
-     );
+     // $checkQuery = pg_query_params(
+     //      $master_conn,
+     //      "SELECT 1 FROM warehouse WHERE latitude = $1 and longitude = $2",
+     //      array($latitude, $longitude)
+     // );
 
-     if (pg_num_rows($checkQuery) == 0) {
+     // if (pg_num_rows($checkQuery) == 0) {
           $query = pg_query_params(
                $master_conn,
                "INSERT INTO warehouse (name, latitude, longitude, location, address, district_id, district_name)
@@ -65,9 +78,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
           } else {
                echo "<p style='color:red;'>Error: " . pg_last_error($master_conn) . "</p>";
           }
-     } else {
-          echo "<script>alert('Warehouse with the same latitude and longitude already exists.');</script>";
-     }
+     // } else {
+     //      echo "<script>alert('Warehouse with the same latitude and longitude already exists.');</script>";
+     // }
 }
 
 
@@ -105,10 +118,10 @@ $district_result = pg_query($fsms_conn, "SELECT id, name FROM district");
                     <input type="text" name="name" required><br><br>
 
                     <label>Latitude</label><br>
-                    <input type="text" name="latitude" pattern="^\d{1,2}\.\d{1,6}$" placeholder="Use this format: 12.123456 → number with 6 digits after the decimal." required><br><br>
+                    <input type="text" name="latitude" required><br><br>
 
                     <label>Longitude</label><br>
-                    <input type="text" name="longitude" pattern="^\d{1,2}\.\d{1,6}$" placeholder="Use this format: 12.123456 → number with 6 digits after the decimal." required><br><br>
+                    <input type="text" name="longitude" required><br><br>
 
                     <label>Location</label><br>
                     <input type="text" name="location" required><br><br>
@@ -116,7 +129,7 @@ $district_result = pg_query($fsms_conn, "SELECT id, name FROM district");
                     <label>Address</label><br>
                     <textarea name="address" rows="5" cols="100" required></textarea><br><br>
 
-                    <label>Select District</label><br>
+                    <!-- <label>Select District</label><br>
                     <select name="district_id" required>
                          <option value="">-- Select District --</option>
                          <?php
@@ -126,7 +139,7 @@ $district_result = pg_query($fsms_conn, "SELECT id, name FROM district");
                               }
                          }
                          ?>
-                    </select><br><br>
+                    </select><br><br> -->
 <div class="form-btn">
                     <button type="submit" >Add Warehouse</button>
                     </div>

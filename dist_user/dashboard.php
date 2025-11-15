@@ -99,6 +99,30 @@ if ($result && pg_num_rows($result) > 0) {
 } else {
      $totalRetailersMapped = 0;
 }
+
+$query = "SELECT COUNT(*) AS total FROM fair_price_shop_data WHERE district_id = $1";
+$result = pg_query_params($master_conn, $query, array($districtId));
+
+if ($result && pg_num_rows($result) > 0) {
+     $row = pg_fetch_assoc($result);
+     $totalFairPriceShops = $row['total'];
+} else {
+     $totalFairPriceShops = 0;
+}
+
+
+$query = " SELECT COUNT(*) AS total FROM transport_report WHERE district_id = $1
+  AND date_trunc('month', report_added_at) = date_trunc('month', CURRENT_DATE)
+";
+$result = pg_query_params($master_conn, $query, array($districtId));
+
+if ($result && pg_num_rows($result) > 0) {
+     $row = pg_fetch_assoc($result);
+     $monthlyTransportCount = $row['total'];
+} else {
+     $monthlyTransportCount = 0;
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -173,6 +197,20 @@ if ($result && pg_num_rows($result) > 0) {
                     <a style="text-decoration: none" href="wholesaler_retailerMap_list.php">
                          <h4>Total Retailers mapped with Wholesalers</h4>
                          <div class="circle blue countCircle" data-count="<?php echo $totalRetailersMapped; ?>"><?php echo $totalRetailersMapped; ?></div>
+                    </a>
+               </div>
+
+               <div class="card card5">
+                    <a style="text-decoration: none" href="fair_price_shop_list.php">
+                         <h4>Total Fair Price Shops Details We have</h4>
+                         <div class="circle blue countCircle" data-count="<?php echo $totalFairPriceShops; ?>"><?php echo $totalFairPriceShops; ?></div>
+                    </a>
+               </div>
+
+               <div class="card card5">
+                    <a style="text-decoration: none" href="both_tier_report.php">
+                         <h4>Total Transport Report Added This Month</h4>
+                         <div class="circle blue countCircle" data-count="<?php echo $monthlyTransportCount; ?>"><?php echo $monthlyTransportCount; ?></div>
                     </a>
                </div>
           </div>

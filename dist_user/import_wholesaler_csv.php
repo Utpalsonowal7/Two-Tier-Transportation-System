@@ -101,12 +101,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_FILES["csv_file"])) {
 
           $exists = pg_query_params(
                $master_conn,
-               "SELECT 1 FROM wholesalers WHERE latitude = $1 AND longitude = $2",
-               [$latitude, $longitude]
+               "SELECT 1 FROM wholesalers WHERE name = $1",
+               [$name]
           );
 
           if (pg_num_rows($exists) > 0) {
-               $errors[] = "Row $rowNumber: Duplicate latitude/longitude already exists.";
+               $errors[] = "Row $rowNumber: Duplicate wholesaler (name already exists).";
                $skipped++;
                continue;
           }

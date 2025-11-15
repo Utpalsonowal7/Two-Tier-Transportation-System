@@ -13,7 +13,7 @@ $encrypted_id = $_GET['id'] ?? null;
 $id = decrypt_id($encrypted_id);
 
 if (!$id) {
-     echo "<script>alert('No wholesaler selected');window.location.href='view_wholesalers.php';</script>";
+     echo "<script>alert('No wholesaler selected');window.location.href='wholesalers.php';</script>";
      exit();
 }
 
@@ -22,7 +22,7 @@ $result = pg_query_params($master_conn, $query, [$id]);
 $row = pg_fetch_assoc($result);
 
 if (!$row) {
-     echo "<script>alert('Wholesaler not found');window.location.href='view_wholesalers.php';</script>";
+     echo "<script>alert('Wholesaler not found');window.location.href='wholesalers.php';</script>";
      exit();
 }
 
@@ -79,7 +79,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
      ]);
 
      if ($update_result) {
-          echo "<script>alert('Wholesaler updated successfully');window.location.href='view_wholesalers.php';</script>";
+          echo "<script>alert('Wholesaler updated successfully');window.location.href='wholesalers.php';</script>";
           exit();
      } else {
           echo "<p style='color:red;'>Error: " . pg_last_error($master_conn) . "</p>";

@@ -68,13 +68,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['name'], $_POST['latitu
      $distances_array = "{" . implode(",", $distances) . "}";
      $warehouse_ids_array = "{" . implode(",", $warehouse_ids) . "}";
 
-     $checkQuery = pg_query_params(
-          $master_conn,
-          "SELECT 1 FROM wholesalers WHERE  latitude = $1 or longitude = $2",
-          array($latitude, $longitude)
-     );
+     // $checkQuery = pg_query_params(
+     //      $master_conn,
+     //      "SELECT 1 FROM wholesalers WHERE  latitude = $1 or longitude = $2",
+     //      array($latitude, $longitude)
+     // );
 
-     if (pg_num_rows($checkQuery) == 0) {
+     // if (pg_num_rows($checkQuery) == 0) {
           $query = pg_query_params(
                $master_conn,
                "INSERT INTO wholesalers (name, latitude, longitude, location, address, district_id, warehouse_ids, warehouse_names, distances, district_name) 
@@ -99,9 +99,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['name'], $_POST['latitu
           } else {
                echo "<p style='color: red;'>Error: " . pg_last_error($master_conn) . "</p>";
           }
-     } else {
-          echo "<script>alert('Credentials already exists.');</script>";
-     }
+     // } else {
+     //      echo "<script>alert('Credentials already exists.');</script>";
+     // }
 }
 ?>
 
@@ -206,11 +206,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['name'], $_POST['latitu
                     <input type="text" name="name" required><br><br>
 
                     <label>Latitude</label><br>
-                    <input type="text" name="latitude" pattern="^\d{1,2}\.\d{4,6}$" required
+                    <input type="text" name="latitude" required
                          placeholder="Use this format: 12.123456 → number with 6 digits after the decimal."><br><br>
 
                     <label>Longitude</label><br>
-                    <input type="text" name="longitude" pattern="^\d{1,2}\.\d{4,6}$"
+                    <input type="text" name="longitude"
                          placeholder="Use this format: 12.123456 → number with 6 digits after the decimal."
                          required><br><br>
 

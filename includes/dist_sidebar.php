@@ -33,65 +33,70 @@ if ($result && pg_num_rows($result) > 0) {
 
      </div>
      <?php if ($role == 't') { ?>
-               <nav class="sidebar-nav">
-                    <ul>
-                         <li><a href="dist_dashboard.php"><i class="fas fa-home"></i> Dashboard</a></li>
+          <nav class="sidebar-nav">
+               <ul>
+                    <li><a href="dist_dashboard.php"><i class="fas fa-home"></i> Dashboard</a></li>
 
-                         <li class="dropdown"><a><i class="fas fa-user-shield"></i> District Users<span><i
-                                             class="fa-solid fa-plus onclick=" toggleDropdown(event)" "></i></span></a>
-                                             <ul class=" dropdown-menu">
-                         <li><a href="add_district_user.php">Add District Users</a></li>
-                         <li><a href="district_user_list.php">Show District Users</a></li>
-                    </ul>
+                    <li class="dropdown"><a><i class="fas fa-user-shield"></i> District Users<span><i
+                                        class="fa-solid fa-plus" onclick="toggleDropdown(event)"></i></span></a>
+                         <ul class=" dropdown-menu">
+                              <li><a href="add_district_user.php">Add District Users</a></li>
+                              <li><a href="district_user_list.php">Show District Users</a></li>
+                         </ul>
                     </li>
 
                     <!-- <li><a href="district_user_list.php"><i class="fas fa-user-shield"></i>District Users<i
                                    class="fa-solid fa-plus"></i></a></li> -->
 
-                    <li class="dropdown"><a><i class="fa-solid fa-database"></i>Master Data<span><i class="fa-solid fa-plus onclick="
-                                        toggleDropdown(event)" "></i></span></a>
-                                   <ul class=" dropdown-menu">
-                    <li><a href="warehouse.php"><i class="fas fa-warehouse"></i> Warehouses</a></li>
-                    <li><a href="wholesalers.php"><i class="fas fa-store"></i> Wholesalers</a></li>
-                    <li><a href="retailers.php"><i class="fas fa-shopping-cart"></i> Retailers</a></li>
-                    </ul>
+                    <li class="dropdown"><a><i class="fa-solid fa-database"></i>Master Data<span><i class="fa-solid fa-plus"
+                                        onclick="toggleDropdown(event)"></i></span></a>
+                         <ul class=" dropdown-menu">
+                              <li><a href="warehouse.php"><i class="fas fa-warehouse"></i> Warehouses</a></li>
+                              <li><a href="wholesalers.php"><i class="fas fa-store"></i> Wholesalers</a></li>
+                              <li><a href="retailers.php"><i class="fas fa-shopping-cart"></i> Retailers</a></li>
+                         </ul>
                     </li>
 
-                    <li class="dropdown"><a><i class="fa-solid fa-link"></i></i>Mapping Data<span><i
-                                        class="fa-solid fa-plus onclick=" toggleDropdown(event)" "></i></span></a>
-                                   <ul class=" dropdown-menu">
-                    <li><a href="wholesaler_map.php"><i class="fas fa-warehouse"></i> Warehouse_wholesale Map</a></li>
-                    <li><a href="retailer_map.php"><i class="fas fa-store"></i> Wholesale_Retailer Map</a></li>
-                    <!-- <li><a href="retailers.php"><i class="fas fa-shopping-cart"></i> Retailers</a></li> -->
-                    </ul>
+                    <li class="dropdown"><a><i class="fa-solid fa-link"></i></i>Mapping Data<span><i class="fa-solid fa-plus"
+                                        onclick="toggleDropdown(event)"></i></span></a>
+                         <ul class=" dropdown-menu">
+                              <li><a href="wholesaler_map.php"><i class="fas fa-warehouse"></i> Warehouse_wholesale Map</a>
+                              </li>
+                              <li><a href="retailer_map.php"><i class="fas fa-store"></i> Wholesale_Retailer Map</a></li>
+                              <!-- <li><a href="retailers.php"><i class="fas fa-shopping-cart"></i> Retailers</a></li> -->
+                         </ul>
                     </li>
 
 
                     <li class="dropdown"><a><i class="fa-solid fa-truck"></i>Manage Transport<span><i
-                                        class="fa-solid fa-plus onclick=" toggleDropdown(event)" "></i></span></a>
-                                   <ul class=" dropdown-menu">
-                    <li><a href="add_comodity_transport.php"><i class="fa-solid fa-truck"></i> Add Comodities Transport Data Tier 1</a></li>
-                    <li><a href="add_comodity_transport2.php"><i class="fa-solid fa-truck"></i> Add Comodities Transport Data Tier 2</a></li>
-                    <li><a href="commodity_transport_data.php"><i class="fas fa-store"></i>Show Comodities Tranport Data Tier 1</a></li>
-                    <li><a href="commodity_transport_data2.php"><i class="fas fa-store"></i>Show Comodities Tranport Data Tier 2</a></li>
-                    <!-- <li><a href="retailers.php"><i class="fas fa-shopping-cart"></i> Retailers</a></li> -->
-                    </ul>
+                                        class="fa-solid fa-plus" onclick="toggleDropdown(event)"></i></span></a>
+                         <ul class=" dropdown-menu">
+                              <li><a href="add_comodity_transport.php"><i class="fa-solid fa-truck"></i> Add Comodities
+                                        Transport Data Tier 1</a></li>
+                              <li><a href="add_comodity_transport2.php"><i class="fa-solid fa-truck"></i> Add Comodities
+                                        Transport Data Tier 2</a></li>
+                              <li><a href="commodity_transport_data.php"><i class="fas fa-store"></i>Show Comodities Tranport
+                                        Data Tier 1</a></li>
+                              <li><a href="commodity_transport_data2.php"><i class="fas fa-store"></i>Show Comodities
+                                        Tranport Data Tier 2</a></li>
+                              <!-- <li><a href="retailers.php"><i class="fas fa-shopping-cart"></i> Retailers</a></li> -->
+                         </ul>
                     </li>
-                  
+
 
 
                     <li class="dropdown"><a><i class="fas fa-cog"></i> Settings
-                    <span><i class="fa-solid fa-plus onclick=" toggleDropdown(event)" "></i></span></a>
-                      <ul class=" dropdown-menu">
-                         <li><a href="setting.php">Update profile</a></li>
-                         <li><a href="change_password.php">Change Password</a></li>
-                      </ul>
-               </li>
+                              <span><i class="fa-solid fa-plus" onclick="toggleDropdown(event)"></i></span></a>
+                         <ul class=" dropdown-menu">
+                              <li><a href="setting.php">Update profile</a></li>
+                              <li><a href="change_password.php">Change Password</a></li>
+                         </ul>
+                    </li>
 
 
 
-                    </ul>
-               </nav>
+               </ul>
+          </nav>
      <?php } ?>
      <div class="logout">
           <a href="dist_logout.php"><i class="fas fa-sign-out-alt"></i> Logout</a>

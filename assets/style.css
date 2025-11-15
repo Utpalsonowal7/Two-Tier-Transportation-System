@@ -15,6 +15,7 @@ html {
      width: 20vw;
      height: 100vh;
      background: #f5f7fa;
+     box-sizing: border-box;
      font-family: "Roboto", sans-serif;
      color: black;
      position: fixed;
@@ -24,6 +25,9 @@ html {
      flex-direction: column;
      padding: 20px;
      z-index: 1000;
+scrollbar-gutter: stable;
+     overflow-y: auto;
+     overflow-x: hidden;
 }
 
 /* .admin-profile {

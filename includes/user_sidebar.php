@@ -1,8 +1,8 @@
 <?php
-$id = $_SESSION['adminid'];
+$id = (int) $_SESSION['adminid'];
 
-$query = "SELECT name, status FROM district_users  WHERE id = $id";
-$result = pg_query($fsms_conn, $query);
+$query = "SELECT name, status FROM district_users  WHERE id = $1";
+$result = pg_query_params($fsms_conn, $query, [$id]);
 
 if ($result && pg_num_rows($result) > 0) {
      $admin = pg_fetch_assoc($result);
@@ -33,7 +33,7 @@ if ($result && pg_num_rows($result) > 0) {
 
      </div>
      <?php if ($role == 't') { ?>
-          <nav class="sidebar-nav">
+          <nav class="sidebar-nav user_sideBar">
                <ul>
                     <li><a href="dashboard.php"><i class="fas fa-home"></i> Dashboard</a></li>
 
@@ -77,28 +77,39 @@ if ($result && pg_num_rows($result) > 0) {
                     </li>
 
                     <li class="dropdown"><a><i class="fa-solid fa-upload"></i>Import data
-                              <span><i class="fa-solid fa-plus" onclick=" toggleDropdown(event)" "></i></span></a>
-               <ul class=" dropdown-menu">
-                    <li>
-                         <a href="import_warehouse_csv.php">Import Warehouse Data</a>
+                              <span><i class="fa-solid fa-plus" onclick="toggleDropdown(event)"></i></span></a>
+                         <ul class=" dropdown-menu">
+                              <li>
+                                   <a href="import_warehouse_csv.php">Import Warehouse Data</a>
+                              </li>
+                              <li>
+                                   <a href="import_wholesaler_csv.php">Import Wholesaler Data</a>
+                              </li>
+                              <li>
+                                   <a href="import_retailer_csv.php">Import Retailer Data</a>
+                              </li>
+                              <li>
+                                   <a href="add_fps_data.php">Import FPS Data</a>
+                              </li>
+                         </ul>
                     </li>
-                    <li>
-                         <a href="import_wholesaler_csv.php">Import Wholesaler Data</a>
+
+                    <li class="dropdown"><a><i class="fas fa-cog"></i> Transport Report
+                              <span><i class="fa-solid fa-plus" onclick="toggleDropdown(event)"></i></span></a>
+                         <ul class=" dropdown-menu">
+                              <li><a href="add_transport_report.php">Add Both Tier report</a></li>
+                              <li><a href="both_tier_report.php">Show Both Tier Report</a></li>
+                         </ul>
                     </li>
-                    <li>
-                         <a href="import_retailer_csv.php">Import Retailer Data</a>
-                    </li>
-               </ul>
-               </li>
 
 
-               <li class="dropdown"><a><i class="fas fa-cog"></i> Settings
-                         <span><i class="fa-solid fa-plus" onclick=" toggleDropdown(event)" "></i></span></a>
-                                               <ul class=" dropdown-menu">
-               <li><a href="setting.php">Update profile</a></li>
-               <li><a href="change_password.php">Change Password</a></li>
-               </ul>
-               </li>
+                    <li class="dropdown"><a><i class="fas fa-cog"></i> Settings
+                              <span><i class="fa-solid fa-plus" onclick="toggleDropdown(event)"></i></span></a>
+                         <ul class=" dropdown-menu">
+                              <li><a href="setting.php">Update profile</a></li>
+                              <li><a href="change_password.php">Change Password</a></li>
+                         </ul>
+                    </li>
 
 
 

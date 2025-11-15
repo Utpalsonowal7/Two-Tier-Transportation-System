@@ -22,19 +22,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['excel_file'])) {
           $sheet = $spreadsheet->getActiveSheet();
           $rows = $sheet->toArray(null, true, true, true);
 
-          $expectedColumns = ['A' => 'Name', 'B' => 'Latitude', 'C' => 'Longitude', 'D' => 'Location', 'E' => 'Address', 'F' => 'Distance to Wholesaler (km)', 'G' => 'District ID', 'H' => 'Wholesaler ID'];
+          $expectedColumns = ['A' => 'Name', 'B' => 'address', 'C' => 'wholesaler Id', 'D' => 'District ID', 'E' =>  'Distance to Wholesaler', 'F' => 'Latitude', 'G' => 'Longitude'];
 
           $rowNumber = 1;
           foreach ($rows as $row) {
-               if ($rowNumber === 1) { 
+               if ($rowNumber === 1) {
                     $rowNumber++;
                     continue;
                }
 
-             
+
                foreach ($expectedColumns as $col => $label) {
                     if (!isset($row[$col]) || trim($row[$col]) === '') {
-                         $errors[] = "Row $rowNumber: Missing value for $label (Column $col). Please check your Excel format.";
+                         $errors[] = "Row $rowNumber:  Missing or invalid data in $label (Column $col). Please check your Excel format.";
                          $skipped++;
                          $rowNumber++;
                          continue 2;
@@ -42,20 +42,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['excel_file'])) {
                }
 
                $name = trim($row['A']);
-               $latitude = trim($row['B']);
-               $longitude = trim($row['C']);
-               $location = trim($row['D']);
-               $address = trim($row['E']);
-               $distance = (float) trim($row['F']);
-               $district_id = (int) trim($row['G']);
-               $wholesaler_id = (int) trim($row['H']);
-
-               if (!is_numeric($latitude) || !is_numeric($longitude)) {
-                    $errors[] = "Row $rowNumber: Invalid latitude or longitude.";
-                    $skipped++;
-                    $rowNumber++;
-                    continue;
-               }
+               $address = trim($row['B']);
+               $wholesaler_id = trim($row['C']);
+               $district_id = trim($row['D']);
+               $distance = (float) trim($row['E']);
+               $latitude = (float) trim($row['F']);
+               $longitude = (float) trim($row['G']);
+               
 
                $wh_result = pg_query_params($master_conn, "SELECT name FROM wholesalers WHERE serial_no = $1", [$wholesaler_id]);
                if (!$wh_result || pg_num_rows($wh_result) === 0) {
@@ -75,19 +68,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['excel_file'])) {
                }
                $district_name = pg_fetch_result($dist_result, 0, 'name');
 
-               $exists = pg_query_params($master_conn, "SELECT 1 FROM retailers WHERE name = $1", [$name]);
-               if (pg_num_rows($exists) > 0) {
-                    $errors[] = "Row $rowNumber: Duplicate FPS (credentials already exists).";
-                    $skipped++;
-                    $rowNumber++;
-                    continue;
-               }
+               // $exists = pg_query_params($master_conn, "SELECT 1 FROM retailers WHERE name = $1", [$name]);
+               // if (pg_num_rows($exists) > 0) {
+               //      $errors[] = "Row $rowNumber: Duplicate retailer (lat/long exists).";
+               //      $skipped++;
+               //      $rowNumber++;
+               //      continue;
+               // }
 
                $insert = pg_query_params(
                     $master_conn,
-                    "INSERT INTO retailers (name, latitude, longitude, location, address, nearest_wholesaler_distance, district_id, nearest_wholesaler_id, nearest_wholesaler_name, district_name)
-                 VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)",
-                    [$name, $latitude, $longitude, $location, $address, $distance, $district_id, $wholesaler_id, $wh_name, $district_name]
+                    "INSERT INTO fair_price_shop_data (name, address, wholesaler_id, wholesaler_name, district_id, district_name, wholesaler_distance, latitude, longitude)
+                 VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)",
+                    [$name, $address, $wholesaler_id, $wh_name, $district_id, $district_name, $distance, $latitude, $longitude]
                );
 
                if ($insert) {
@@ -218,10 +211,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['excel_file'])) {
 
      <div class="main-content">
           <div class="upload-box">
-               <h2>Import Retailers from Excel</h2>
+               <h2>Import FPS from Excel</h2>
                <form method="POST" enctype="multipart/form-data">
                     <input type="file" name="excel_file" accept=".xlsx, .xls" required><br><br>
-                    <button type="submit">Import Retailers</button>
+                    <button type="submit">Import FPS</button>
                </form>
                <?php if ($imported || $skipped): ?>
                     <p class="msg">Imported: <?= $imported ?>, Skipped: <?= $skipped ?></p>
@@ -236,7 +229,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['excel_file'])) {
                     </div>
                <?php endif; ?>
                <br>
-               <a href="add_retailer.php">← Back to Retailer Form</a>
+
           </div>
      </div>
 
@@ -247,13 +240,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['excel_file'])) {
                <p>Please ensure your Excel file follows this column order:</p>
                <ol style="text-align: left; padding-left: 20px;">
                     <li>Name</li>
+                    <li>Address</li>
+                    <li>Wholesaler ID</li>
+                    <li>District ID</li>
+                    <li>Distance to Wholesaler</li>
                     <li>Latitude</li>
                     <li>Longitude</li>
-                    <li>Location</li>
-                    <li>Address</li>
-                    <li>Distance to Wholesaler (in km)</li>
-                    <li>District ID</li>
-                    <li>Wholesaler ID</li>
                </ol>
           </div>
      </div>
@@ -262,13 +254,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['excel_file'])) {
      <script>
           window.onload = function () {
 
-               if(!sessionStorage.getItem('formatModal')) {
-               setTimeout(function () {
-                    document.getElementById('formatModal').style.display = 'block';
+               if (!sessionStorage.getItem('formatModal')) {
+                    setTimeout(function () {
+                         document.getElementById('formatModal').style.display = 'block';
 
-                    sessionStorage.setItem('formatModal', 'true');
-               }, 3000);
-          }
+                         sessionStorage.setItem('formatModal', 'true');
+                    }, 3000);
+               }
           };
      </script>
 

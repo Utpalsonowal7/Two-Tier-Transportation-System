@@ -35,7 +35,8 @@ if (!$select_result || pg_num_rows($select_result) == 0) {
 $row = pg_fetch_assoc($select_result);
 $wholesaler_query = pg_query_params($master_conn, "SELECT serial_no, name, warehouse_names, distances FROM wholesalers where district_id = $1 ORDER BY name",[$district_id]);
 
-$wh_data_js = [];
+$wh_data_js[trim($wh['name'])] = $cleaned;
+
 pg_result_seek($wholesaler_query, 0);
 while ($wh = pg_fetch_assoc($wholesaler_query)) {
      $warehouses = preg_split('/,(?=(?:[^"]*"[^"]*")*[^"]*$)/', $wh['warehouse_names']);
@@ -104,7 +105,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                          <?php
                          pg_result_seek($wholesaler_query, 0);
                          while ($wrow = pg_fetch_assoc($wholesaler_query)) { ?>
-                              <option value="<?php echo htmlspecialchars($wrow['name']); ?>" <?php echo ($wrow['name'] == $row['wholesaler_name']) ? 'selected' : ''; ?>>
+                              <option value="<?php echo htmlspecialchars(trim($wrow['name'])); ?>" <?php echo (trim($wrow['name']) == trim($row['wholesaler_name'])) ? 'selected' : ''; ?>>
                                    <?php echo htmlspecialchars($wrow['name']); ?>
                               </option>
                          <?php } ?>
